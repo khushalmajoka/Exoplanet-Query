@@ -2,11 +2,15 @@
 import { useEffect, useState } from "react";
 import QueryPanel from "./components/QueryPanel";
 import Display from "./components/Display";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setData } from "./store/csvDataSlice";
 import papa from "papaparse";
 
 const App = () => {
+  const filters = useSelector((state) => state.csvData.filters);
+  const searchClickedStatus = useSelector(
+    (state) => state.csvData.searchClicked
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,15 +23,27 @@ const App = () => {
             const dataArray = result.data.map((row) => {
               return Object.values(row);
             });
-            dispatch(setData(dataArray))
+            dispatch(setData(dataArray));
           },
         });
       });
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    if (
+      searchClickedStatus &&
+      filters.hostname === "" &&
+      filters.disc_method === "" &&
+      filters.disc_year === "" &&
+      filters.disc_facility === ""
+    ) {
+      alert("You must select something.")
+    }
+  }, [searchClickedStatus]);
 
   return (
     <div className="h-screen">
-      <QueryPanel/>
+      <QueryPanel />
       <Display />
     </div>
   );

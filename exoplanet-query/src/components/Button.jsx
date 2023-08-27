@@ -6,7 +6,7 @@ const Button = ({ buttonText }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     if (buttonText === 'Search') {
-      dispatch(setSearchClicked());
+      dispatch(setSearchClicked(true));
     } else if (buttonText === 'Clear') {
       dispatch(setClearClicked(true));
     }

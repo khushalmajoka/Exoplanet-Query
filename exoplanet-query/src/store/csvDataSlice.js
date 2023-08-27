@@ -3,8 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
+  filteredData: [],
+  filters: {
+    hostname: "",
+    disc_method: "",
+    disc_year: "",
+    disc_facility: "",
+  },
   searchClicked: false,
   clearClicked: false,
+  toggleDisplay: false,
 };
 
 const csvDataSlice = createSlice({
@@ -14,14 +22,25 @@ const csvDataSlice = createSlice({
     setData: (state, action) => {
       state.data = action.payload;
     },
-    setSearchClicked: (state) => {
-      state.searchClicked = !state.searchClicked;
+    setFilteredData: (state, action) => {
+      state.filteredData = action.payload;
+    },
+    setSearchClicked: (state, action) => {
+      state.searchClicked = action.payload;
     },
     setClearClicked: (state, action) => {
       state.clearClicked = action.payload;
+    },
+    setFilters: (state, action) => {
+      const { filterType, filterValue } = action.payload;
+      state.filters = { ...state.filters, [filterType]: filterValue };
+    },
+    setToggleDisplay: (state, action) => {
+      state.toggleDisplay = action.payload
     }
   },
 });
 
-export const { setData, setSearchClicked, setClearClicked } = csvDataSlice.actions;
+export const { setData, setFilteredData, setSearchClicked, setClearClicked, setFilters, setToggleDisplay } =
+  csvDataSlice.actions;
 export default csvDataSlice.reducer;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { setClearClicked } from "../store/csvDataSlice";
+import { setClearClicked, setFilters } from "../store/csvDataSlice";
 
 const Selector = ({ data, selectorText, placeholderForSearch }) => {
   const [inputValue, setInputValue] = useState("");
@@ -12,15 +12,41 @@ const Selector = ({ data, selectorText, placeholderForSearch }) => {
 
   const dispatch = useDispatch();
 
-  const clearButtonStatus = useSelector((state) => state.clearClicked);
+  const clearButtonStatus = useSelector((state) => state.csvData.clearClicked);
+
+  useEffect(() => {
+    if(selected){
+      switch (selectorText) {
+        case "Host Name":
+          dispatch(setFilters({ filterType: "hostname", filterValue: selected }));
+          break;
+        case "Discovery Method":
+          dispatch(
+            setFilters({ filterType: "disc_method", filterValue: selected })
+          );
+          break;
+        case "Discovery Year":
+          dispatch(
+            setFilters({ filterType: "disc_year", filterValue: selected })
+          );
+          break;
+        case "Discovery Facility":
+          dispatch(
+            setFilters({ filterType: "disc_facility", filterValue: selected })
+          );
+          break;
+      }
+    }
+  }, [selected]);
 
   useEffect(() => {
     if (clearButtonStatus) {
-      setSelected(""); 
+      setSelected("");
       setInputValue("");
+      setOpen(false);
       dispatch(setClearClicked(false));
     }
-  }, [clearButtonStatus, dispatch]);
+  }, [clearButtonStatus]);
 
   return (
     <div className="w-1/6 ml-5 mr-5 font-medium h-10">
@@ -52,26 +78,28 @@ const Selector = ({ data, selectorText, placeholderForSearch }) => {
             className="placeholder:text-gray-700 p-2 outline-none"
           />
         </div>
-        {Array.from(data)?.map((item, index) => (
-          <li
-            key={index}
-            className={`p-2 text-sm hover:bg-sky-600 hover:text-white
+        {Array.from(data)
+          ?.sort((a, b) => a.localeCompare(b))
+          ?.map((item, index) => (
+            <li
+              key={index}
+              className={`p-2 text-sm hover:bg-sky-600 hover:text-white
             ${
               item?.toLowerCase() === selected?.toLowerCase() &&
               "bg-sky-600 text-white"
             }
             ${item?.toLowerCase().startsWith(inputValue) ? "block" : "hidden"}`}
-            onClick={() => {
-              if (item?.toLowerCase() !== selected.toLowerCase()) {
-                setSelected(item);
-                setOpen(false);
-                setInputValue("");
-              }
-            }}
-          >
-            {item}
-          </li>
-        ))}
+              onClick={() => {
+                if (item?.toLowerCase() !== selected.toLowerCase()) {
+                  setSelected(item);
+                  setOpen(false);
+                  setInputValue("");
+                }
+              }}
+            >
+              {item}
+            </li>
+          ))}
       </ul>
     </div>
   );
