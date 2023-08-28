@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import QueryPanel from "./components/QueryPanel";
 import Display from "./components/Display";
 import { useDispatch, useSelector } from "react-redux";
-import { setData } from "./store/csvDataSlice";
+import { setData, setSearchClicked } from "./store/csvDataSlice";
 import papa from "papaparse";
 
 const App = () => {
@@ -38,6 +38,7 @@ const App = () => {
       filters.disc_facility === ""
     ) {
       alert("You must select something.")
+      dispatch(setSearchClicked(false))
     }
   }, [searchClickedStatus]);
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { setClearClicked, setFilters } from "../store/csvDataSlice";
+import { setClearClicked, setFilteredData, setFilters, setToggleDisplay } from "../store/csvDataSlice";
 
 const Selector = ({ data, selectorText, placeholderForSearch }) => {
   const [inputValue, setInputValue] = useState("");
@@ -15,10 +15,12 @@ const Selector = ({ data, selectorText, placeholderForSearch }) => {
   const clearButtonStatus = useSelector((state) => state.csvData.clearClicked);
 
   useEffect(() => {
-    if(selected){
+    if (selected) {
       switch (selectorText) {
         case "Host Name":
-          dispatch(setFilters({ filterType: "hostname", filterValue: selected }));
+          dispatch(
+            setFilters({ filterType: "hostname", filterValue: selected })
+          );
           break;
         case "Discovery Method":
           dispatch(
@@ -45,6 +47,12 @@ const Selector = ({ data, selectorText, placeholderForSearch }) => {
       setInputValue("");
       setOpen(false);
       dispatch(setClearClicked(false));
+      dispatch(setToggleDisplay(false));
+      dispatch(setFilteredData([]));
+      dispatch(setFilters({ filterType: "hostname", filterValue: "" }));
+      dispatch(setFilters({ filterType: "disc_method", filterValue: "" }));
+      dispatch(setFilters({ filterType: "disc_year", filterValue: "" }));
+      dispatch(setFilters({ filterType: "disc_facility", filterValue: "" }));
     }
   }, [clearButtonStatus]);
 
@@ -64,7 +72,7 @@ const Selector = ({ data, selectorText, placeholderForSearch }) => {
         <BiChevronDown size={20} className={`${open && "rotate-180"}`} />
       </div>
       <ul
-        className={`bg-white mt-2 overflow-y-auto border border-gray-400 rounded ${
+        className={`fixed bg-white mt-2 overflow-y-auto border border-gray-400 rounded ${
           open ? "max-h-60 visible" : "max-h-0 collapse"
         } `}
       >

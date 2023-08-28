@@ -2,8 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Table from './Table'
-import NoResultFound from './NoResultFound';
+import Table from "./Table";
+import NoResultFound from "./NoResultFound";
 import {
   setSearchClicked,
   setToggleDisplay,
@@ -21,31 +21,31 @@ const Display = () => {
     (state) => state.csvData.searchClicked
   );
 
-  const clearClickedStatus = useSelector((state) => state.csvData.clearClicked);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(clearClickedStatus){
-      dispatch(setToggleDisplay(false));
-    }
-  }, [clearClickedStatus]);
-
-  useEffect(() => {
-    if(searchClickedStatus){
+    if (
+      searchClickedStatus &&
+      !(
+        filters.hostname === "" &&
+        filters.disc_method === "" &&
+        filters.disc_year === "" &&
+        filters.disc_facility === ""
+      )
+    ) {
       const filtered = data.filter((row) => {
         const hostnameFilterMatch =
           filters.hostname === "" || row[1] === filters.hostname;
-  
+
         const discMethodFilterMatch =
           filters.disc_method === "" || row[2] === filters.disc_method;
-  
+
         const discYearFilterMatch =
           filters.disc_year === "" || row[3] === filters.disc_year;
-  
+
         const discFacilityFilterMatch =
           filters.disc_facility === "" || row[4] === filters.disc_facility;
-  
+
         return (
           hostnameFilterMatch &&
           discMethodFilterMatch &&
@@ -60,8 +60,16 @@ const Display = () => {
   }, [searchClickedStatus]);
 
   return (
-    <div className="h-fit min-h-[70%] flex justify-center pl-20 pr-20 pt-5 pb-10">
-      {displayTable ? filteredData.length > 0 ? <Table filteredData={filteredData}/> : <NoResultFound/> : <UnqueriedDisplay />}
+    <div className="h-fit min-h-[70%] flex justify-center pl-20 pr-20 pt-5 pb-5">
+      {displayTable ? (
+        filteredData.length > 0 ? (
+          <Table filteredData={filteredData} />
+        ) : (
+          <NoResultFound />
+        )
+      ) : (
+        <UnqueriedDisplay />
+      )}
     </div>
   );
 };
