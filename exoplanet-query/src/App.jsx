@@ -14,7 +14,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("/dist/assets/exoplanet_data.csv")
+    fetch("/assets/exoplanet_data.csv")
       .then((res) => res.text())
       .then((text) => {
         papa.parse(text, {
