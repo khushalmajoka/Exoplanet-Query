@@ -5,10 +5,15 @@ The project includes a sortable table component that displays exoplanet data fet
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Contributing](#contributing)
+
+## Live Demo
+
+Check out the live demo of the project: [Exoplanet Query](https://exoplanet-query-by-khushal.netlify.app)
 
 ## Features
 
