@@ -64,39 +64,79 @@ const Table = ({ filteredData }) => {
         <thead>
           <tr className="border-b border-gray-300 tracking-wide">
             <th className="text-left pt-2 pb-2 w-1/5">
-              PLANET NAME{" "}
-              <span className="inline-flex">
-                <FaSortUp onClick={() => handleUpClick("planet_name")} />
-                <FaSortDown onClick={() => handleDownClick("planet_name")} />
-              </span>
+              <div className="flex items-center">
+                <span className="mr-2">PLANET NAME</span>
+                <span>
+                  <FaSortUp
+                    className="-mb-3 cursor-pointer"
+                    onClick={() => handleUpClick("planet_name")}
+                  />
+                  <FaSortDown
+                    className="cursor-pointer"
+                    onClick={() => handleDownClick("planet_name")}
+                  />
+                </span>
+              </div>
             </th>
             <th className="text-left pt-2 pb-2 w-1/5">
-              HOST NAME{" "}
-              <span className="inline-flex">
-                <FaSortUp onClick={() => handleUpClick("hostname")} />
-                <FaSortDown onClick={() => handleDownClick("hostname")} />
-              </span>
+              <div className="flex items-center">
+                <span className="mr-2">HOST NAME</span>
+                <span>
+                  <FaSortUp
+                    className="-mb-3 cursor-pointer"
+                    onClick={() => handleUpClick("hostname")}
+                  />
+                  <FaSortDown
+                    className="cursor-pointer"
+                    onClick={() => handleDownClick("hostname")}
+                  />
+                </span>
+              </div>
             </th>
             <th className="text-left pt-2 pb-2 w-1/5">
-              DISCOVERY METHOD{" "}
-              <span className="inline-flex">
-                <FaSortUp onClick={() => handleUpClick("disc_method")} />
-                <FaSortDown onClick={() => handleDownClick("disc_method")} />
-              </span>
+              <div className="flex items-center">
+                <span className="mr-2">DISCOVERY METHOD</span>
+                <span>
+                  <FaSortUp
+                    className="-mb-3 cursor-pointer"
+                    onClick={() => handleUpClick("disc_method")}
+                  />
+                  <FaSortDown
+                    className="cursor-pointer"
+                    onClick={() => handleDownClick("disc_method")}
+                  />
+                </span>
+              </div>
             </th>
             <th className="text-left pt-2 pb-2 w-1/5">
-              DISCOVERY YEAR{" "}
-              <span className="inline-flex">
-                <FaSortUp onClick={() => handleUpClick("disc_year")} />
-                <FaSortDown onClick={() => handleDownClick("disc_year")} />
-              </span>
+              <div className="flex items-center">
+                <span className="mr-2">DISCOVERY YEAR</span>
+                <span>
+                  <FaSortUp
+                    className="-mb-3 cursor-pointer"
+                    onClick={() => handleUpClick("disc_year")}
+                  />
+                  <FaSortDown
+                    className="cursor-pointer"
+                    onClick={() => handleDownClick("disc_year")}
+                  />
+                </span>
+              </div>
             </th>
             <th className="text-left pt-2 pb-2 w-1/5">
-              DISCOVERY FACILITY{" "}
-              <span className="inline-flex">
-                <FaSortUp onClick={() => handleUpClick("disc_facility")} />
-                <FaSortDown onClick={() => handleDownClick("disc_facility")} />
-              </span>
+              <div className="flex items-center">
+                <span className="mr-2">DISCOVERY FACILITY</span>
+                <span>
+                  <FaSortUp
+                    className="-mb-3 cursor-pointer"
+                    onClick={() => handleUpClick("disc_facility")}
+                  />
+                  <FaSortDown
+                    className="cursor-pointer"
+                    onClick={() => handleDownClick("disc_facility")}
+                  />
+                </span>
+              </div>
             </th>
           </tr>
         </thead>

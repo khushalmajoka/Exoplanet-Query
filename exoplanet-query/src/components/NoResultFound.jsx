@@ -2,7 +2,7 @@ import no_result from '../data/no_result.gif'
 
 const NoResultFound = () => {
   return (
-    <div><img src={no_result}/></div>
+    <div><img className='w-[698px]' src={no_result}/></div>
   )
 }
 
