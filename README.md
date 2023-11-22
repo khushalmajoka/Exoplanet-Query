@@ -3,6 +3,8 @@
 This is a React project created using Vite, a build tool that aims to be fast and provides an optimized development experience. 
 The project includes a sortable table component that displays exoplanet data fetched from a csv that is download from [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS).
 
+<img width="960" alt="image" src="https://github.com/khushalmajoka/Exoplanet-Query/assets/56840292/c6c19850-3f2e-44d7-a12d-2fb35158cbce">
+
 ## Table of Contents
 
 - [Live Demo](#live-demo)
